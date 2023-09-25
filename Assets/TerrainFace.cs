@@ -8,9 +8,10 @@ public class TerrainFace
     int resolution;
     Vector3 localUp; //up dir
     Vector3 axisA, axisB; //right and forward directions
-
-    public TerrainFace(Mesh mesh, int resolution, Vector3 localUp)
+    ShapeGenerator shapeGenerator;
+    public TerrainFace(ShapeGenerator generator, Mesh mesh, int resolution, Vector3 localUp)
     {
+        this.shapeGenerator = generator;
         this.mesh = mesh;
         this.resolution = resolution;
         this.localUp = localUp;
@@ -41,7 +42,7 @@ public class TerrainFace
                                                  + (percent.y-.5f) * 2 * axisB;
                 
                 Vector3 pointOnUnitSphere = pointOnSurface.normalized;
-                vertices[index] = pointOnUnitSphere;
+                vertices[index] = shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere);
                 //
                 //triangles
 
